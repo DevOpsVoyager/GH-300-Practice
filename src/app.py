@@ -10,6 +10,24 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
 from pathlib import Path
+import math
+
+
+def is_prime(number: int) -> bool:
+    """Return True when the given number is prime."""
+    if number < 2:
+        return False
+    if number == 2:
+        return True
+    if number % 2 == 0:
+        return False
+
+    limit = int(math.isqrt(number))
+    for factor in range(3, limit + 1, 2):
+        if number % factor == 0:
+            return False
+    return True
+
 
 app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
